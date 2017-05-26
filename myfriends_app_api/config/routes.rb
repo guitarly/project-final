@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friends
   resources :users do
     collection do
       post '/login', to: 'users#login'
