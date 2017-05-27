@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="header clearfix" ng-controller="LoginController as vm">
+    <!-- <div class="logo-section">
+      <img src="/images/logo.png" alt="logo" id="logo">
+    </div> -->
+
+    <nav>
+      {{currentUser.name}}
+      <ul class="nav nav-pills pull-right">
+
+        <div ng-hide="currentUser">
+          <a href="#!/login"><span class="glyphicon glyphicon-log-out"></span>   Login          </a>
+
+          <a href="#!/register"><span class="glyphicon glyphicon-modal-window"> </span> Register </a>
+        </div>
+
+        <div ng-hide="!currentUser">
+          <a href="#!/dashboard"><span class="glyphicon glyphicon-tasks" ></span> Dashboard</a>
+          <a href="" ng-click="vm.logout()"><span class="glyphicon glyphicon-log-out" ></span>Logout</a>
+          <br>
+          <div>
+            Login as: {{currentUser.name}}
+          </div>
+        </div>
+
+      </ul>
+    </nav>
+
+  </div>
+</div>
