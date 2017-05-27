@@ -76,11 +76,13 @@
         console.log(result.data);
 
         if (result.data.error) {
-          $rootScope.errorMessage = result.data.error;
+          $rootScope.error_msg = result.data.error;
+          vm.dataLoading = false;
         } else {
           vm.dataLoading = false;
-          $location.path('/login');
+          $location.path('/dashboard');
         };
+
 
       }.bind(this));
 

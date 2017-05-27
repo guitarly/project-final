@@ -5,20 +5,20 @@
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4 class="modal-title">Add Friend</h4>
   </div>
-  <div class="modal-body">
-    <form class="form-horizontal">
+  <div class="modal-body" ng-controller="FriendController as ctrl">
+    <form class="form-horizontal" ng-submit="ctrl.submitNewFriend()">
 
       <div class="form-group row">
         <label class="control-label col-sm-2" for="fullname">Full Name:</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" id="fullname" placeholder="Enter the Full Name">
+          <input class="form-control" type="text" id="fullname" placeholder="Enter the Full Name" ng-model="ctrl.frienddata.name">
         </div>
       </div>
 
       <div class="form-group row">
         <label class="control-label col-sm-2" for="address">Address:</label>
         <div class="col-sm-10">
-          <input class="form-control" type="text" id="address" placeholder="Enter address">
+          <input class="form-control" type="text" id="address" placeholder="Enter address" ng-model="ctrl.frienddata.address">
         </div>
       </div>
 
@@ -26,14 +26,14 @@
         <label class="control-label col-sm-2" for="city">City:</label>
         <div class="col-sm-10">
 
-          <input class="form-control" type="text" id="city" placeholder="Enter City">
+          <input class="form-control" type="text" id="city" placeholder="Enter City" ng-model="ctrl.frienddata.city">
         </div>
       </div>
 
       <div class="form-group row">
         <label class="control-label col-sm-2" for="state">State:</label>
         <div class="col-sm-10">
-          <select class="form-control" id="state">
+          <select class="form-control" id="state" ng-model="ctrl.frienddata.state">
             <option value=""></option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -105,13 +105,42 @@
         </div>
       </div>
 
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="zipcode">Zip Code:</label>
+        <div class="col-sm-10">
+
+          <input class="form-control" type="number" id="zipcode" placeholder="Enter Zip Code" ng-model="ctrl.frienddata.zip_code">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="zipcode">Phone#:</label>
+        <div class="col-sm-10">
+
+          <input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number" ng-model="ctrl.frienddata.phone">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="control-label col-sm-2" for="image">Image URL:</label>
+        <div class="col-sm-10">
+
+          <input class="form-control" type="text" id="image" placeholder="Enter Image URL " ng-model="ctrl.frienddata.image">
+        </div>
+      </div>
+
+
+
+      <div class="modal-footer">
+        <!-- <button type="submit" class="btn btn-success">Save</button> -->
+        <input type="submit" class="btn btn-info" value="Submit">
+        <span ng-include="'./views/partials/dataloading.html'"></span>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
 
 
     </form>
 
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-  </div>
+
 </div>

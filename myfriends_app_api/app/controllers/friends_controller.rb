@@ -16,12 +16,24 @@ class FriendsController < ApplicationController
   # POST /friends
   def create
     @friend = Friend.new(friend_params)
+    @friend.user_id = params[:user_id]
+    address = @friend.address
+    city = @friend.city
+    state = @friend.state
+    zip = @friend.zip_code
 
-    if @friend.save
-      render json: @friend, status: :created, location: @friend
-    else
-      render json: @friend.errors, status: :unprocessable_entity
-    end
+    # will check geo .. get lat/longtitude
+    fulladdress =  address + ", " + city +" " + state + " " + zip
+    puts "--------"
+    puts   fulladdress , @friend.user_id
+
+    render json: {error: "tets"}
+
+    # if @friend.save
+    #   render json: @friend, status: :created, location: @friend
+    # else
+    #   render json: @friend.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /friends/1
