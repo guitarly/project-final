@@ -51,10 +51,9 @@
 
   }; // end function
 
-  run.$inject = ['$rootScope', '$location', '$cookies', '$http'];
+  run.$inject = ['$rootScope', '$location', '$cookies', '$http', '$window'];
 
-  function run($rootScope, $location, $cookies, $http) {
-    console.log("Im in the run function");
+  function run($rootScope, $location, $cookies, $http, $window) {
     // keep user logged in after page refresh
     $rootScope.globals = $cookies.getObject('globals') || {};
 
@@ -64,40 +63,25 @@
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
       // redirect to login page if not logged in and trying to access a restricted page
-      console.log("in rootScope");
-      var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
-      // var loggedIn = $rootScope.globals.currentUser;
 
-      var loggedIn = $rootScope.currentUser;
-      if (restrictedPage && !loggedIn) {
+      let restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+
+      var storageUser = $window.localStorage.getItem('user');
+      if (storageUser) {
+        try {
+          $rootScope.currentUser = JSON.parse(storageUser);
+        } catch (e) {
+          $window.localStorage.removeItem('user');
+        }
+      }
+
+      let loggedIn = $rootScope.globals.currentUser;
+      if (restrictedPage && !loggedIn && !storageUser) {
         $location.path('/');
       }
     });
   }; // end run function
 
-
-  // // Server - set cookies
-  // app.factory("userPersistenceService", [
-  //   "$cookies",
-  //   function($cookies) {
-  //     var userName = "";
-  //
-  //     return {
-  //       setCookieData: function(username) {
-  //         userName = username;
-  //         $cookies.put("userName", username);
-  //       },
-  //       getCookieData: function() {
-  //         userName = $cookies.get("userName");
-  //         return userName;
-  //       },
-  //       clearCookieData: function() {
-  //         userName = "";
-  //         $cookies.remove("userName");
-  //       }
-  //     };
-  //   }
-  // ]);
 
 
 })();
