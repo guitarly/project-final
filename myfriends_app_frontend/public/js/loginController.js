@@ -40,6 +40,7 @@
           localStorage.setItem('token', JSON.stringify(response.data.token));
           $window.localStorage.setItem('user', JSON.stringify(response.data.user));
           vm.dataLoading = false;
+          $rootScope.friends = response.data.friends;
           // $rootScope.loggedIn = true;
           $location.path('/dashboard');
         };

@@ -1,5 +1,8 @@
+
+
 class FriendsController < ApplicationController
   before_action :set_friend, only: [:show, :update, :destroy]
+
 
   # GET /friends
   def index
@@ -16,24 +19,35 @@ class FriendsController < ApplicationController
   # POST /friends
   def create
     @friend = Friend.new(friend_params)
+
     @friend.user_id = params[:user_id]
     address = @friend.address
     city = @friend.city
     state = @friend.state
     zip = @friend.zip_code
+    phone = @friend.phone
 
     # will check geo .. get lat/longtitude
     fulladdress =  address + ", " + city +" " + state + " " + zip
     puts "--------"
-    puts   fulladdress , @friend.user_id
+    puts   fulladdress , @friend.user_id, phone
 
-    render json: {error: "tets"}
 
-    # if @friend.save
-    #   render json: @friend, status: :created, location: @friend
-    # else
-    #   render json: @friend.errors, status: :unprocessable_entity
-    # end
+
+    # @data = Carrier::Lookup::Perform.new
+    # @data.lookup(
+    #    :number => phone.to_s
+    # )
+    # render json: {error: @data }
+    @friends = Friend.all
+
+    if @friend.save
+      # render json: @friend, status: :created, location: @friend
+      render json: @friends , status: :created
+    else
+      render json: @friend.errors, status: :unprocessable_entity
+    end
+
   end
 
   # PATCH/PUT /friends/1
@@ -60,4 +74,7 @@ class FriendsController < ApplicationController
     def friend_params
       params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :latitude, :longtitude, :phone, :phone_company, :image)
     end
+    # def friend_params
+    #   params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :phone)
+    # end
 end

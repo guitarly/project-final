@@ -34,6 +34,7 @@
           vm.dataLoading = false;
         } else {
           console.log(response.data);
+          $rootScope.friends = response.data;
 
           vm.dataLoading = false;
           // $rootScope.loggedIn = true;

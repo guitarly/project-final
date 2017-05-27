@@ -42,6 +42,9 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.0.6)
+    carrierlookup (0.0.1)
+      ccsv
+    ccsv (1.1.0)
     concurrent-ruby (1.0.5)
     dotenv (2.2.1)
     dotenv-rails (2.2.1)
@@ -128,6 +131,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
+  carrierlookup
   dotenv-rails
   jwt
   listen (~> 3.0.5)

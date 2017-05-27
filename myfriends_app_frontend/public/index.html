@@ -6,10 +6,12 @@
   <title>My Friends</title>
 
 
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
   <!-- <link rel="stylesheet" href="/css/bootstrap.css"> -->
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/friendFrame.css">
 
   <!-- Bootstrap helper -->
   <!-- <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
@@ -35,17 +37,28 @@
   <header>
     <section ng-include="'./views/partials/navbar.html'"></section>
   </header>
+  <main>
+    <div ng-view></div>
+  </main>
 
-  <div ng-view></div>
+  <footer>
+    <section ng-include="'./views/partials/footer.html'"></section>
+  </footer>
+
+
 
 
   <!-- =================== SCRIPTS ================== -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js">
-  </script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js">
+  </script> -->
   <script src="js/app.js" charset="utf-8"></script>
   <script src="js/loginController.js" charset="utf-8"></script>
   <script src="js/friendController.js" charset="utf-8"></script>
   <script src="js/userPersistenceService.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+
+
 
 
 </body>

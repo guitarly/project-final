@@ -1,0 +1,45 @@
+<div class="row table-responsive">
+  <!-- <table class="table table-bordered table-hover"> -->
+  <table id="table-all" class="display table-bordered" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>City/St:</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="friend in friends">
+
+      <tr>
+        <td>
+          {{friend.name}}
+        </td>
+        <td>
+          {{friend.city}}, {{friend.state}}
+        </td>
+        <td>
+          {{friend.phone}}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <!-- <br> -->
+  <!-- <div class="col-md-12 text-center"> -->
+  <!--
+        <form action="/users/delete/<%=user.id; %>?_method=DELETE" method="POST" onSubmit="if(!confirm('Do you really want to delete this user?')){return false;}">
+          <input class="btn btn-md btn-danger " type="submit" value="Delete User">
+        </form> -->
+
+  <!-- </div> -->
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#table-all').DataTable({
+      "order": [
+        [0, "asc"]
+      ]
+    });
+  });
+</script>
