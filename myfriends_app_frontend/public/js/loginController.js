@@ -37,10 +37,8 @@
           vm.dataLoading = false;
         } else {
           $rootScope.currentUser = response.data.user;
-          console.log("currentUser", this.currentUser);
           localStorage.setItem('token', JSON.stringify(response.data.token));
-          // $window.sessionStorage.setItem('currentUser', response.data.user);
-
+          $window.localStorage.setItem('user', JSON.stringify(response.data.user));
           vm.dataLoading = false;
           // $rootScope.loggedIn = true;
           $location.path('/dashboard');
@@ -54,9 +52,9 @@
     // Logout
     this.logout = function() {
       console.log("Logout");
-      console.log("gettokein", localStorage.getItem('token'));
       localStorage.clear('token');
       $scope.error_msg = null;
+      $window.localStorage.removeItem('user');
       location.reload();
       $location.path("/");
     }; // End logout function
