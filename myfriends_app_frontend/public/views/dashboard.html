@@ -1,5 +1,5 @@
 <h1>dashboard</h1>
-
+<script src="js/googlemap.js" charset="utf-8"></script>
 <section class="friends_class">
   <!-- Modal Add Friend-->
   <div id="addFriend" class="modal fade" role="dialog">
@@ -17,14 +17,19 @@
     <div class="col-sm-5 sidenav">
       <span ng-include="'./views/allFriends.html'"></span>
     </div>
+
     <div class="col-sm-7 text-left">
-      <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <!-- Google maps -->
+      <!-- <div style='width: 800px;'>
+        <div id="basic_map" style='width: 800px; height: 400px;'></div>
+      </div> -->
+      <div style='width: 800px;'>
+        <div id="map" style='width: 800px; height: 400px;'></div>
+      </div>
+
+      <!-- <div style='width: 800px;'>
+        <div id="multi_markers" style='width: 800px; height: 400px;'></div>
+      </div> -->
     </div>
 
     <!-- <div class="col-sm-2 sidenav">
@@ -39,3 +44,12 @@
 
   </div>
 </div>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss&callback=initMap">
+</script>
+
+<!-- Google maps -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss"></script>
+<script src="https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script src='https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js'></script> -->

@@ -28,9 +28,9 @@ class FriendsController < ApplicationController
     phone = @friend.phone
 
     # will check geo .. get lat/longtitude
-    fulladdress =  address + ", " + city +" " + state + " " + zip
-    puts "--------"
-    puts   fulladdress , @friend.user_id, phone
+    @friend.fulladdress = address + ", " + city +" " + state + " " + zip
+    # puts "--------"
+    # puts   fulladdress , @friend.user_id, phone
 
 
 
@@ -39,10 +39,11 @@ class FriendsController < ApplicationController
     #    :number => phone.to_s
     # )
     # render json: {error: @data }
-    @friends = Friend.all
+
 
     if @friend.save
       # render json: @friend, status: :created, location: @friend
+      @friends = Friend.all
       render json: @friends , status: :created
     else
       render json: @friend.errors, status: :unprocessable_entity
@@ -72,7 +73,7 @@ class FriendsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def friend_params
-      params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :latitude, :longtitude, :phone, :phone_company, :image)
+      params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :latitude, :longitude, :phone, :phone_company, :image)
     end
     # def friend_params
     #   params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :phone)

@@ -19,6 +19,7 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
   <!-- ================== ANGULAR =================== -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,6 +29,11 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.min.js"></script>
 
+
+  <!-- Google maps -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKTgcA_hyr-dJ5p3LQqXQF0en7YKeAjuQ"></script>
+  <script src="https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+  <script src='https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js'></script> -->
 
   <!-- ====================== CSS =================== -->
 
@@ -41,24 +47,21 @@
     <div ng-view></div>
   </main>
 
-  <footer>
+  <!-- <footer>
     <section ng-include="'./views/partials/footer.html'"></section>
-  </footer>
+  </footer> -->
 
 
 
 
   <!-- =================== SCRIPTS ================== -->
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js">
-  </script> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"> -->
+  </script>
   <script src="js/app.js" charset="utf-8"></script>
   <script src="js/loginController.js" charset="utf-8"></script>
   <script src="js/friendController.js" charset="utf-8"></script>
-  <script src="js/userPersistenceService.js" charset="utf-8"></script>
-  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-
-
-
+  <script src="js/gmaps_google.js" charset="utf-8"></script>
+  <!-- <script src="js/userPersistenceService.js" charset="utf-8"></script> -->
 
 
 </body>
