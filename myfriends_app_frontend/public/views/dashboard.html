@@ -33,9 +33,18 @@
 
     <!-- Google map section  -->
     <div class="col-sm-7 text-left">
-      <div map-lazy-load="{{googleMapsUrl}}">
-        <ng-map center="41,-87" zoom="3"></ng-map>
+
+      <div ng-controller="FriendController">
+        <div id="map"></div>
+        <div id="repeat" ng-repeat="marker in markers | orderBy : 'name'">
+          <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+            <label id="names">{{marker.title}}</label></a>
+        </div>
       </div>
+
+      <!-- <div map-lazy-load="{{googleMapsUrl}}">
+        <ng-map center="41,-87" zoom="3"></ng-map>
+      </div> -->
       <!-- Google maps -->
       <!-- <div style='width: 800px;'>
         <div id="basic_map" style='width: 800px; height: 400px;'></div>

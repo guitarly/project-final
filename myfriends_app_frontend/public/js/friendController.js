@@ -12,11 +12,11 @@
 
     this.url = 'http://localhost:3000';
     var vm = this;
+    // this.getGoogleMap();
 
     this.submitNewFriend = function() {
-      console.log(this.frienddata);
       let userId = $rootScope.currentUser.id;
-      this.frienddata.user_id = userId;
+      // this.frienddata.user_id = userId;
 
       $http({
         method: 'POST',
@@ -27,13 +27,11 @@
         }
 
       }).then(function(response) {
-        console.log(response.data);
-
         if (response.data.status == 401) {
           $rootScope.error_msg = "Error - Friend can't be save";
           vm.dataLoading = false;
         } else {
-          console.log(response.data);
+
           $rootScope.friends = response.data;
           $window.localStorage.setItem('friends', JSON.stringify(response.data));
 
@@ -47,11 +45,56 @@
 
     }; // end submitNewFriend function
 
+    // GET Maps for all Friends' Address
+    this.getGoogleMap = function() {
+
+      var mapOptions = {
+        zoom: 4,
+        center: new google.maps.LatLng(33, -77),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      $scope.markers = [];
+      var infoWindow = new google.maps.InfoWindow();
+
+      var createMarker = function(info) {
+
+        var marker = new google.maps.Marker({
+          map: $scope.map,
+          position: new google.maps.LatLng(info.latitude, info.longitude),
+          title: info.name
+        });
+        marker.content = '<div class="infoWindowContent">' + info.name + '<br />' + info.fulladdress + ' ,' + info.phone + ' N, </div>';
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infoWindow.setContent('<h2>' + marker.title + '</h2>' +
+            marker.content);
+          infoWindow.open($scope.map, marker);
+        });
+
+        // console.log(marker);
+        $scope.markers.push(marker);
+
+      };
+
+      // var storageFriends = $window.localStorage.getItem('friends');
+      var friends = $rootScope.friends;
+
+      for (let i = 0; i < friends.length; i++) {
+        console.log(friends[i]);
+        createMarker(friends[i]);
+      };
+
+      $scope.openInfoWindow = function(e, selectedMarker) {
+        e.preventDefault();
+        google.maps.event.trigger(selectedMarker, 'click');
+      }
+
+    }; // end getGoogleMap function
+
   }; // end FriendController function
 
-  // GET Maps for all Friends' Address
-  this.getGoogleMap = function() {
 
-  }; // end getGoogleMap function
 
 })();

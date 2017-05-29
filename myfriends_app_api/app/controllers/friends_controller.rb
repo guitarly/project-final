@@ -19,26 +19,24 @@ class FriendsController < ApplicationController
   # POST /friends
   def create
     @friend = Friend.new(friend_params)
+    address = " "
+    city = ""
+    state = ""
+    zip = " "
+    phone = ""
+    userid = 0
+    userid = params[:user_id]
 
-    @friend.user_id = params[:user_id]
+    @friend.user_id = userid
     address = @friend.address
-    city = @friend.city
+    cite = @friend.city
     state = @friend.state
     zip = @friend.zip_code
-    phone = @friend.phone
+    phone  = @friend.phone
 
     # will check geo .. get lat/longtitude
-    @friend.fulladdress = address + ", " + city +" " + state + " " + zip
-    # puts "--------"
-    # puts   fulladdress , @friend.user_id, phone
+    @friend.fulladdress = address + ", " + city + " " + state + " " + zip
 
-
-
-    # @data = Carrier::Lookup::Perform.new
-    # @data.lookup(
-    #    :number => phone.to_s
-    # )
-    # render json: {error: @data }
 
 
     if @friend.save
@@ -76,6 +74,6 @@ class FriendsController < ApplicationController
       params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :latitude, :longitude, :phone, :phone_company, :image)
     end
     # def friend_params
-    #   params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :phone)
+    #   params.require(:friend).permit(:name, :city, :state)
     # end
 end
