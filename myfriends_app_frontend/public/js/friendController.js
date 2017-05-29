@@ -86,7 +86,7 @@
       var friends = $rootScope.friends;
 
       for (let i = 0; i < friends.length; i++) {
-        console.log(friends[i]);
+
         createMarker(friends[i]);
       };
 

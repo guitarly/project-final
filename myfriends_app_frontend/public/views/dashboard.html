@@ -34,7 +34,7 @@
     <!-- Google map section  -->
     <div class="col-sm-7 text-left">
 
-      <div ng-controller="LoginController">
+      <div ng-controller="FriendController">
         <div id="map"></div>
         <div id="repeat" ng-repeat="marker in markers | orderBy : 'name'">
           <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
