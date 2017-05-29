@@ -39,6 +39,9 @@
           $rootScope.currentUser = response.data.user;
           localStorage.setItem('token', JSON.stringify(response.data.token));
           $window.localStorage.setItem('user', JSON.stringify(response.data.user));
+
+          $window.localStorage.setItem('friends', JSON.stringify(response.data.friends));
+
           vm.dataLoading = false;
           $rootScope.friends = response.data.friends;
           // $rootScope.loggedIn = true;

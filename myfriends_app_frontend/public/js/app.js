@@ -74,6 +74,14 @@
           $window.localStorage.removeItem('user');
         }
       }
+      var storageFriends = $window.localStorage.getItem('friends');
+      if (storageFriends) {
+        try {
+          $rootScope.friends = JSON.parse(storageFriends);
+        } catch (e) {
+          $window.localStorage.removeItem('friends');
+        }
+      }
 
       let loggedIn = $rootScope.globals.currentUser;
       if (restrictedPage && !loggedIn && !storageUser) {

@@ -1,5 +1,14 @@
+<!-- <script src="js/gmaps_google.js" charset="utf-8">
+</script>
+<script src="js/underscore.js" charset="utf-8"></script>
+
+
+<script src="https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script src='https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js'></script> -->
+
+
 <h1>dashboard</h1>
-<script src="js/googlemap.js" charset="utf-8"></script>
+
 <section class="friends_class">
   <!-- Modal Add Friend-->
   <div id="addFriend" class="modal fade" role="dialog">
@@ -8,6 +17,10 @@
     </div>
   </div>
   <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addFriend">Add Friend</button>
+  <div ng-controller="FriendController as ctrl" ng-show="ctrl.dataLoading">
+    <span ng-include="'./views/partials/dataloading.html'"></span>
+  </div>
+
 </section>
 <!--  start from here... -->
 <div class="container-fluid text-center">
@@ -18,14 +31,18 @@
       <span ng-include="'./views/allFriends.html'"></span>
     </div>
 
+    <!-- Google map section  -->
     <div class="col-sm-7 text-left">
+      <div map-lazy-load="{{googleMapsUrl}}">
+        <ng-map center="41,-87" zoom="3"></ng-map>
+      </div>
       <!-- Google maps -->
       <!-- <div style='width: 800px;'>
         <div id="basic_map" style='width: 800px; height: 400px;'></div>
       </div> -->
-      <div style='width: 800px;'>
+      <!-- <div style='width: 800px;'>
         <div id="map" style='width: 800px; height: 400px;'></div>
-      </div>
+      </div> -->
 
       <!-- <div style='width: 800px;'>
         <div id="multi_markers" style='width: 800px; height: 400px;'></div>
@@ -46,8 +63,10 @@
 </div>
 
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss&callback=initMap">
-</script>
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss&callback=initMap" async defer></script> -->
+<!-- <script src="js/googlemap.js" charset="utf-8"></script> -->
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss&callback=initMap">
+</script> -->
 
 <!-- Google maps -->
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss"></script>

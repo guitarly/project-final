@@ -5,9 +5,9 @@
     .module('Myfriends_App')
     .controller('FriendController', FriendController);
 
-  FriendController.$inject = ['$http', '$scope', '$location', '$rootScope'];
+  FriendController.$inject = ['$http', '$scope', '$location', '$rootScope', '$window'];
 
-  function FriendController($http, $scope, $location, $rootScope) {
+  function FriendController($http, $scope, $location, $rootScope, $window) {
 
 
     this.url = 'http://localhost:3000';
@@ -35,8 +35,10 @@
         } else {
           console.log(response.data);
           $rootScope.friends = response.data;
+          $window.localStorage.setItem('friends', JSON.stringify(response.data));
 
           vm.dataLoading = false;
+          this.getGoogleMap();
           // $rootScope.loggedIn = true;
           $location.path('/dashboard');
         };
@@ -45,6 +47,11 @@
 
     }; // end submitNewFriend function
 
-  } // end FriendController function
+  }; // end FriendController function
+
+  // GET Maps for all Friends' Address
+  this.getGoogleMap = function() {
+
+  }; // end getGoogleMap function
 
 })();
