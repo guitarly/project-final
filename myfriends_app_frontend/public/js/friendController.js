@@ -12,8 +12,6 @@
 
     this.url = 'http://localhost:3000';
     var vm = this;
-    // this.getGoogleMap();
-
     this.submitNewFriend = function() {
       let userId = $rootScope.currentUser.id;
       // this.frienddata.user_id = userId;
@@ -96,6 +94,18 @@
       }
 
     }; // end getGoogleMap function
+
+
+    this.init = function() {
+      if ($rootScope.retrieveGoogleMap) {
+        this.getGoogleMap();
+        $rootScope.retrieveGoogleMap = !$rootScope.retrieveGoogleMap;
+      };
+
+    };
+
+    this.init();
+
 
   }; // end FriendController function
 

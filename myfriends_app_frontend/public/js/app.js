@@ -43,6 +43,7 @@
         // },
         templateUrl: '/views/dashboard.html',
         controller: 'LoginController',
+        // controller: 'FriendController',
         controllerAs: 'vm'
       })
       .otherwise({
@@ -81,6 +82,11 @@
         } catch (e) {
           $window.localStorage.removeItem('friends');
         }
+      }
+
+      if (typeof $rootScope.retrieveGoogleMap == "undefined") {
+        console.log("$rootScope.retrieveGoogleMap == underfined");
+        $rootScope.retrieveGoogleMap = true;
       }
 
       let loggedIn = $rootScope.globals.currentUser;

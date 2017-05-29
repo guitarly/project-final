@@ -48,6 +48,7 @@
           // $scope.mapController.getGoogleMap();
           // $rootScope.loggedIn = true;
           vm.dataLoading = false;
+          $rootScope.retrieveGoogleMap = true;
           $location.path('/dashboard');
         };
 
