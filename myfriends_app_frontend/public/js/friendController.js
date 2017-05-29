@@ -65,7 +65,11 @@
           position: new google.maps.LatLng(info.latitude, info.longitude),
           title: info.name
         });
-        marker.content = '<div class="infoWindowContent">' + info.name + '<br />' + info.fulladdress + ' ,' + info.phone + ' N, </div>';
+
+        // '<img ng-src='" + info.image + "' style='width: 40px; height:40px />'"
+        // marker.content = '<div class="infoWindowContent">' + info.name + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
+
+        marker.content = '<div class="infoWindowContent">' + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.setContent('<h2>' + marker.title + '</h2>' +

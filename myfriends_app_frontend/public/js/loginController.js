@@ -42,9 +42,12 @@
 
           $window.localStorage.setItem('friends', JSON.stringify(response.data.friends));
 
-          vm.dataLoading = false;
+
           $rootScope.friends = response.data.friends;
+          // this.getGoogleMap();
+          // $scope.mapController.getGoogleMap();
           // $rootScope.loggedIn = true;
+          vm.dataLoading = false;
           $location.path('/dashboard');
         };
 
@@ -59,6 +62,7 @@
       localStorage.clear('token');
       $scope.error_msg = null;
       $window.localStorage.removeItem('user');
+      $window.localStorage.removeItem('friends');
       location.reload();
       $location.path("/");
     }; // End logout function
@@ -112,6 +116,59 @@
       }.bind(this));
 
     }; // end getUsers function
+
+    // GET Maps for all Friends' Address
+    this.getGoogleMap = function() {
+
+      var mapOptions = {
+        zoom: 4,
+        center: new google.maps.LatLng(33, -77),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      $scope.markers = [];
+      var infoWindow = new google.maps.InfoWindow();
+
+      var createMarker = function(info) {
+
+        var marker = new google.maps.Marker({
+          map: $scope.map,
+          position: new google.maps.LatLng(info.latitude, info.longitude),
+          title: info.name
+        });
+
+        // '<img ng-src='" + info.image + "' style='width: 40px; height:40px />'"
+        // marker.content = '<div class="infoWindowContent">' + info.name + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
+
+        marker.content = '<div class="infoWindowContent">' + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infoWindow.setContent('<h2>' + marker.title + '</h2>' +
+            marker.content);
+          infoWindow.open($scope.map, marker);
+        });
+
+        // console.log(marker);
+        $scope.markers.push(marker);
+
+      };
+
+      // var storageFriends = $window.localStorage.getItem('friends');
+      var friends = $rootScope.friends;
+      console.log(friends);
+
+      for (let i = 0; i < friends.length; i++) {
+        console.log(friends[i]);
+        createMarker(friends[i]);
+      };
+
+      $scope.openInfoWindow = function(e, selectedMarker) {
+        e.preventDefault();
+        google.maps.event.trigger(selectedMarker, 'click');
+      }
+
+    }; // end getGoogleMap function
 
   }; // end
 

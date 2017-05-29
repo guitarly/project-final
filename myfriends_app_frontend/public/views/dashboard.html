@@ -34,7 +34,7 @@
     <!-- Google map section  -->
     <div class="col-sm-7 text-left">
 
-      <div ng-controller="FriendController">
+      <div ng-controller="LoginController">
         <div id="map"></div>
         <div id="repeat" ng-repeat="marker in markers | orderBy : 'name'">
           <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
@@ -48,14 +48,6 @@
       <!-- Google maps -->
       <!-- <div style='width: 800px;'>
         <div id="basic_map" style='width: 800px; height: 400px;'></div>
-      </div> -->
-      <!-- <div style='width: 800px;'>
-        <div id="map" style='width: 800px; height: 400px;'></div>
-      </div> -->
-
-      <!-- <div style='width: 800px;'>
-        <div id="multi_markers" style='width: 800px; height: 400px;'></div>
-      </div> -->
     </div>
 
     <!-- <div class="col-sm-2 sidenav">
@@ -68,16 +60,5 @@
     </div> -->
 
 
+    </div>
   </div>
-</div>
-
-
-<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss&callback=initMap" async defer></script> -->
-<!-- <script src="js/googlemap.js" charset="utf-8"></script> -->
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss&callback=initMap">
-</script> -->
-
-<!-- Google maps -->
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRNhMc4TEHz_kgIaRp-izynjxzTR8_ss"></script>
-<script src="https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-<script src='https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js'></script> -->
