@@ -1,11 +1,18 @@
 <div class="bs-component" ng-controller="FriendController as ctrl">
 
+
   <form class="form-inline">
     <div class="form-group">
+      <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addFriend">Add Friend</button>
+      <div ng-show="ctrl.dataLoading">
+        <span ng-include="'./views/partials/dataloading.html'"></span>
+      </div>
+
       <label>Search:</label>
-      <input type="text" ng-model="search" class="form-control" placeholder="Search">
+      <input type="text" ng-model="searchText" class="form-control" placeholder="Search">
     </div>
   </form>
+
 
   <table id="table-all" class="table table-bordered table-striped table-hover" cellspacing="0" width="100%">
     <thead>
@@ -23,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="friend in friends |orderBy:sortKey:reverse | filter:search" class="friend-info">
+      <tr ng-repeat="friend in friends | filter:searchText | orderBy:sortKey:reverse ">
         <td><a href="" ng-click="ctrl.showFriend(friend)" data-toggle="modal" data-target="#EditFriend"> {{friend.name}}</a></td>
         <td><a id="country_container" href="" ng-click="ctrl.showAddress($event, friend.marker)">{{friend.fulladdress}}</a></td>
         <td>{{friend.phone}}</td>
@@ -33,13 +40,6 @@
     </tbody>
   </table>
 </div>
-
-<script>
-  function sendText() {
-    alert("here");
-  };
-</script>
-
 
 <!-- Edit friend -->
 <!-- Modal Add Friend-->

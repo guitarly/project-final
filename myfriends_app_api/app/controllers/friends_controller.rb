@@ -58,12 +58,6 @@ class FriendsController < ApplicationController
 
     @friend = Friend.find(friend[:id])
 
-    puts "im in the update"
-    puts "----------"
-    puts friend[:name], friend[:address]
-    puts "----------"
-
-
     address = ""
     city = ""
     state = ""

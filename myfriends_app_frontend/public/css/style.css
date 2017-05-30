@@ -124,15 +124,17 @@ footer {
   width: 100%;
   position: relative;
   color: black;
-  background: #e4e4e4;
+  /*background: #e4e4e4;*/
   padding-top: 10px;
   flex-direction: column;
   justify-content: center;
 }
 
-.footer {
+footer {
+  position: fixed;
+  clear: both;
   height: 50px;
-  margin-top: -50px;
+  margin-top: -150px;
 }
 
 .body-div {
