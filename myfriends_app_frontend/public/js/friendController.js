@@ -98,7 +98,7 @@
       $scope.markers = [];
       var infoWindow = new google.maps.InfoWindow();
 
-      var createMarker = function(info) {
+      var createMarker = function(info, i) {
 
         var marker = new google.maps.Marker({
           map: $scope.map,
@@ -119,7 +119,7 @@
 
         // console.log(marker);
         $scope.markers.push(marker);
-
+        $rootScope.friends[i].marker = marker;
       };
 
       var friends = null;
@@ -132,12 +132,10 @@
         }
       }
       friends = $rootScope.friends;
-      console.log("in the google storageFriends",
-        friends);
 
-      for (let i = 0; i < friends.length; i++) {
+      for (let i = 0; i < $rootScope.friends.length; i++) {
 
-        createMarker(friends[i]);
+        createMarker($rootScope.friends[i], i);
       };
 
       $scope.openInfoWindow = function(e, selectedMarker) {
@@ -163,16 +161,18 @@
       $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     };
 
+
     this.showFriend = function(friend) {
-      console.log("edit friend", friend);
       $rootScope.myFriend = friend;
-    };
+    }; // end showFriend function
 
 
-    // TEsting...
-    $scope.clickMe = function(id) {
-      console.log("TEST");
-    }
+    // show address on the google map
+    this.showAddress = function(e, marker) {
+
+      e.preventDefault();
+      google.maps.event.trigger(marker, 'click');
+    }; // end showAddress function
 
 
   }; // end FriendController function

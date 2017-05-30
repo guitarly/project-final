@@ -25,8 +25,9 @@
     <tbody>
       <tr ng-repeat="friend in friends |orderBy:sortKey:reverse | filter:search" class="friend-info">
         <td><a href="" ng-click="ctrl.showFriend(friend)" data-toggle="modal" data-target="#EditFriend"> {{friend.name}}</a></td>
-        <td>{{friend.fulladdress}}</td>
+        <td><a id="country_container" href="" ng-click="ctrl.showAddress($event, friend.marker)">{{friend.fulladdress}}</a></td>
         <td>{{friend.phone}}</td>
+
       </tr>
 
     </tbody>
