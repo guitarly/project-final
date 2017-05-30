@@ -47,13 +47,48 @@
     this.submitEditFriend = function() {
       console.log("Edit friend");
       console.log($rootScope.myFriend);
+      var userId = $rootScope.currentUser.id;
+      var friendId = $rootScope.myFriend.id;
+      // /users/: user_id / friends /: id
+
+      $http({
+        method: 'PUT',
+        url: this.url + '/users/' + userId + '/friends/' + friendId,
+        data: {
+          friend: $rootScope.myFriend,
+          userId: userId
+        }
+
+      }).then(function(response) {
+        if (response.data.status == 401) {
+          $rootScope.error_msg = "Error - Friend can't be save";
+          vm.dataLoading = false;
+        } else {
+          console.log("save friend ok", response.data);
+          $rootScope.friends = null;
+
+          $window.localStorage.removeItem('friends');
+          $rootScope.friends = response.data;
+          $window.localStorage.setItem('friends', JSON.stringify(response.data));
+
+          vm.dataLoading = false;
+          this.getGoogleMap();
+          // $rootScope.loggedIn = true;
+          $location.path('/dashboard');
+        };
+
+      }.bind(this));
+
 
     }; // end submitEditFriend function
 
+
     // GET Maps for all Friends' Address
     this.getGoogleMap = function() {
+      var mapOptions = {};
+      $scope.map = null;
 
-      var mapOptions = {
+      mapOptions = {
         zoom: 4,
         center: new google.maps.LatLng(37.56, -92),
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -71,12 +106,10 @@
           title: info.name
         });
 
-        // '<img ng-src='" + info.image + "' style='width: 40px; height:40px />'"
-        // marker.content = '<div class="infoWindowContent">' + info.name + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
-        // console.log(info.image);
-        // marker.content = '<IMG BORDER="0" width="80" ALIGN="Left" SRC="' + info.image + '"> <br>' + '<div class="infoWindowContent" id="myCtrl" ng-app="Myfriends_App" ng-controller="FriendController as ctrl" >' + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '<br /><button onclick="sendText()" id="demo">send text</button>' + '  </div>';
 
-        marker.content = '<IMG BORDER="0" width="80" ALIGN="Left" SRC="' + info.image + '"> <br>' + '<div ng-app="Myfriends_App" ng-controller="FriendController as vm"><h2>' + marker.title + '</h2><input type="button" value="get" ng-click="vm.clickMe(' + info.name + ')"/>' + '<div class="infoWindowContent">' + info.fulladdress + '</div><div class="infoWindowContent">' + info.phone + '</div></div>';
+        marker.content = '<IMG BORDER="0" width="80" ALIGN="Left" SRC="' + info.image + '"> <br>' + '<div class="infoWindowContent" id="myCtrl" ng-app="Myfriends_App" ng-controller="FriendController as ctrl" >' + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '<br /><button onclick="sendText()" id="demo">send text</button>' + '  </div>';
+
+        // marker.content = '<IMG BORDER="0" width="80" ALIGN="Left" SRC="' + info.image + '"> <br>' + '<div ng-app="Myfriends_App" ng-controller="FriendController as vm"><h2>' + marker.title + '</h2><input type="button" value="get" ng-click="vm.clickMe(' + info.name + ')"/>' + '<div class="infoWindowContent">' + info.fulladdress + '</div><div class="infoWindowContent">' + info.phone + '</div></div>';
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.setContent('<h2>' + marker.title + '</h2>' +
@@ -89,8 +122,18 @@
 
       };
 
-      // var storageFriends = $window.localStorage.getItem('friends');
-      var friends = $rootScope.friends;
+      var friends = null;
+      var storageFriends = $window.localStorage.getItem('friends');
+      if (storageFriends) {
+        try {
+          $rootScope.friends = JSON.parse(storageFriends);
+        } catch (e) {
+          $window.localStorage.removeItem('friends');
+        }
+      }
+      friends = $rootScope.friends;
+      console.log("in the google storageFriends",
+        friends);
 
       for (let i = 0; i < friends.length; i++) {
 

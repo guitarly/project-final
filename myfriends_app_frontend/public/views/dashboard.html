@@ -36,12 +36,11 @@
 
       <div ng-controller="FriendController">
         <div id="map"></div>
-        <div id="repeat" ng-repeat="marker in markers | orderBy : 'name'">
+        <div id="repeat" ng-repeat="marker in markers track by $index | orderBy: 'name' ">
           <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
             <label id="names">{{marker.title}}</label></a>
         </div>
       </div>
-
 
 
       <!-- <div class="col-sm-2 sidenav">

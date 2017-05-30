@@ -41,7 +41,9 @@ class FriendsController < ApplicationController
 
     if @friend.save
       # render json: @friend, status: :created, location: @friend
-      @friends = Friend.all
+      # @friends = Friend.all
+      @friends = Friend.where(user_id: userid)
+
       render json: @friends , status: :created
     else
       render json: @friend.errors, status: :unprocessable_entity
@@ -51,8 +53,58 @@ class FriendsController < ApplicationController
 
   # PATCH/PUT /friends/1
   def update
+
+    friend = params[:friend]
+
+    @friend = Friend.find(friend[:id])
+
+    puts "im in the update"
+    puts "----------"
+    puts friend[:name], friend[:address]
+    puts "----------"
+
+
+    address = ""
+    city = ""
+    state = ""
+    zip = " "
+    phone = ""
+    uuserid = 0
+
+    address = friend[:address]
+    city = friend[:city]
+    state = friend[:state]
+    zip = friend[:zip_code]
+    phone  =friend[:phone]
+    userid = params[:userId]
+
+
+
+    # @friend = friend
+    @friend[:id] = friend[:id]
+    @friend[:user_id] = friend[:user_id]
+    @friend[:address] = friend[:address]
+    @friend[:city] = friend[:city]
+    @friend[:state] = friend[:state]
+    @friend[:zip_code] = friend[:zip_code]
+    @friend[:name] = friend[:name]
+    @friend[:phone] = friend[:phone]
+    @friend[:fulladdress] = address + ", " + city + " " + state + " " + zip
+    @friend[:phone_company] = "at&t"
+
+    puts @friend[:user_id]
+
+      # render json: {message: "testing"}
+      # if @friend.save
+      #   @friends = Friend.find_by(user_id: userid)
+      #   render json: @friends
+      # else
+      #   render json: @friend.errors, status: :unprocessable_entity
+      # end
+
     if @friend.update(friend_params)
-      render json: @friend
+      @friends = Friend.where(user_id: userid)
+      render json: @friends
     else
       render json: @friend.errors, status: :unprocessable_entity
     end
@@ -74,6 +126,6 @@ class FriendsController < ApplicationController
       params.require(:friend).permit(:name, :address, :city, :state, :zip_code, :latitude, :longitude, :phone, :phone_company, :image)
     end
     # def friend_params
-    #   params.require(:friend).permit(:name, :city, :state)
+    #   params.require(:friend).permit(:name)
     # end
 end
