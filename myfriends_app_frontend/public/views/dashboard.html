@@ -21,6 +21,17 @@
     <span ng-include="'./views/partials/dataloading.html'"></span>
   </div>
 
+
+  <div id="editFriend" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <span ng-include="'./views/addfriend.html'"></span>
+    </div>
+  </div>
+  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addFriend">Add Friend</button>
+  <div ng-controller="FriendController as ctrl" ng-show="ctrl.dataLoading">
+    <span ng-include="'./views/partials/dataloading.html'"></span>
+  </div>
+
 </section>
 <!--  start from here... -->
 <div class="container-fluid text-center">
@@ -28,7 +39,7 @@
   <div class="row content">
 
     <div class="col-sm-5 sidenav">
-      <span ng-include="'./views/allFriends.html'"></span>
+      <div ng-include="'./views/allFriends.html'"></div>
     </div>
 
     <!-- Google map section  -->
@@ -42,15 +53,9 @@
         </div>
       </div>
 
-      <!-- <div map-lazy-load="{{googleMapsUrl}}">
-        <ng-map center="41,-87" zoom="3"></ng-map>
-      </div> -->
-      <!-- Google maps -->
-      <!-- <div style='width: 800px;'>
-        <div id="basic_map" style='width: 800px; height: 400px;'></div>
-    </div>
 
-    <!-- <div class="col-sm-2 sidenav">
+
+      <!-- <div class="col-sm-2 sidenav">
       <div class="well">
         <p>ADS</p>
       </div>

@@ -30,7 +30,7 @@
   </div>
 </div> -->
 
-<nav class="navbar navbar-inverse ">
+<nav class="navbar navbar-standard ">
   <div class="container-fluid" ng-controller="LoginController as vm">
 
     <div class="navbar-header">
@@ -45,6 +45,7 @@
 
     <div ng-hide="currentUser">
 
+
       <form id="signin" class="navbar-form navbar-right" role="form" ng-submit="vm.login()">
 
         <div class="input-group">
@@ -58,7 +59,17 @@
         </div>
 
         <button type="submit" class="btn btn-primary navbar-btn">Login</button>
+
       </form>
+      <ul class="nav navbar-nav navbar-right">
+        <div>
+          <span ng-if="error_msg" style="background: yellow">
+            {{error_msg}}
+          </span>
+
+        </div>
+
+      </ul>
 
       <ul class="nav navbar-nav navbar-right">
 
@@ -67,6 +78,8 @@
             Register
             </a>
         </li>
+
+
 
       </ul>
     </div>

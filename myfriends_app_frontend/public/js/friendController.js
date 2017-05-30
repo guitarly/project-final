@@ -48,7 +48,7 @@
 
       var mapOptions = {
         zoom: 4,
-        center: new google.maps.LatLng(33, -77),
+        center: new google.maps.LatLng(37.56, -92),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
       $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -105,6 +105,11 @@
     };
 
     this.init();
+
+    $scope.sort = function(keyname) {
+      $scope.sortKey = keyname; //set the sortKey to the param passed
+      $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    };
 
 
   }; // end FriendController function

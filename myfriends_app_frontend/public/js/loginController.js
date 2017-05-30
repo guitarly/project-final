@@ -33,7 +33,8 @@
         console.log(response.data);
 
         if (response.data.status == 401) {
-          $rootScope.error_msg = "Unauthorized";
+          console.log("response.data.", response.data.message);
+          $rootScope.error_msg = response.data.message;
           vm.dataLoading = false;
         } else {
           $rootScope.currentUser = response.data.user;
