@@ -43,6 +43,13 @@
 
     }; // end submitNewFriend function
 
+    // Edit Friend info
+    this.submitEditFriend = function() {
+      console.log("Edit friend");
+      console.log($rootScope.myFriend);
+
+    }; // end submitEditFriend function
+
     // GET Maps for all Friends' Address
     this.getGoogleMap = function() {
 
@@ -66,8 +73,10 @@
 
         // '<img ng-src='" + info.image + "' style='width: 40px; height:40px />'"
         // marker.content = '<div class="infoWindowContent">' + info.name + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
+        // console.log(info.image);
+        // marker.content = '<IMG BORDER="0" width="80" ALIGN="Left" SRC="' + info.image + '"> <br>' + '<div class="infoWindowContent" id="myCtrl" ng-app="Myfriends_App" ng-controller="FriendController as ctrl" >' + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '<br /><button onclick="sendText()" id="demo">send text</button>' + '  </div>';
 
-        marker.content = '<div class="infoWindowContent">' + '<br />' + info.fulladdress + ' ,<br/>' + info.phone + '  </div>';
+        marker.content = '<IMG BORDER="0" width="80" ALIGN="Left" SRC="' + info.image + '"> <br>' + '<div ng-app="Myfriends_App" ng-controller="FriendController as vm"><h2>' + marker.title + '</h2><input type="button" value="get" ng-click="vm.clickMe(' + info.name + ')"/>' + '<div class="infoWindowContent">' + info.fulladdress + '</div><div class="infoWindowContent">' + info.phone + '</div></div>';
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.setContent('<h2>' + marker.title + '</h2>' +
@@ -110,6 +119,17 @@
       $scope.sortKey = keyname; //set the sortKey to the param passed
       $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     };
+
+    this.showFriend = function(friend) {
+      console.log("edit friend", friend);
+      $rootScope.myFriend = friend;
+    };
+
+
+    // TEsting...
+    $scope.clickMe = function(id) {
+      console.log("TEST");
+    }
 
 
   }; // end FriendController function

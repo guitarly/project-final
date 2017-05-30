@@ -1,4 +1,4 @@
-<div class="bs-component" ng-controller="FriendController">
+<div class="bs-component" ng-controller="FriendController as ctrl">
 
   <form class="form-inline">
     <div class="form-group">
@@ -24,7 +24,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="friend in friends |orderBy:sortKey:reverse | filter:search" class="friend-info">
-        <td>{{friend.name}}</td>
+        <td><a href="" ng-click="ctrl.showFriend(friend)" data-toggle="modal" data-target="#EditFriend"> {{friend.name}}</a></td>
         <td>{{friend.fulladdress}}</td>
         <td>{{friend.phone}}</td>
       </tr>
@@ -32,6 +32,25 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  function sendText() {
+    alert("here");
+  };
+</script>
+
+
+<!-- Edit friend -->
+<!-- Modal Add Friend-->
+<div id="EditFriend" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <span ng-include="'./views/editfriend.html'"></span>
+  </div>
+</div>
+
+
+
+
 
 
 <!-- </div> -->
