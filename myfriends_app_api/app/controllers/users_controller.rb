@@ -5,10 +5,13 @@ class UsersController < ApplicationController
 
   def login
     puts "Login"
+
     user = User.find_by(username: params[:user][:username])
     if user && user.authenticate(params[:user][:password])
       token = create_token(user.id, user.username)
-      render json: {status: 200, user: user, token: token}
+
+      friends = Friend.where(user_id: user.id)
+      render json: {status: 200, user: user, token: token, friends: friends}
     else
       render json: {status: 401, message: "Unauthorized"}
     end
@@ -92,6 +95,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+
     if @user.update(user_params)
       render json: @user
     else

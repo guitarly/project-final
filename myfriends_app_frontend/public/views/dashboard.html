@@ -1,1 +1,57 @@
+<!-- <script src="js/gmaps_google.js" charset="utf-8">
+</script>
+<script src="js/underscore.js" charset="utf-8"></script>
+
+
+<script src="https://cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script src='https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js'></script> -->
+
+
 <h1>dashboard</h1>
+
+<section class="friends_class">
+  <!-- Modal Add Friend-->
+  <div id="addFriend" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <span ng-include="'./views/addfriend.html'"></span>
+    </div>
+  </div>
+  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addFriend">Add Friend</button>
+  <div ng-controller="FriendController as ctrl" ng-show="ctrl.dataLoading">
+    <span ng-include="'./views/partials/dataloading.html'"></span>
+  </div>
+
+</section>
+<!--  start from here... -->
+<div class="container-fluid text-center">
+
+  <div class="row content">
+
+    <div class="col-sm-5 sidenav">
+      <div ng-include="'./views/allFriends.html'"></div>
+    </div>
+
+    <!-- Google map section  -->
+    <div class="col-sm-7 text-left">
+
+      <div ng-controller="FriendController">
+        <div id="map"></div>
+        <div id="repeat" ng-repeat="marker in markers track by $index | orderBy: 'name' ">
+          <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+            <!-- <label id="names">{{marker.title}}</label></a> -->
+        </div>
+      </div>
+
+
+      <!-- <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div> -->
+
+
+    </div>
+  </div>

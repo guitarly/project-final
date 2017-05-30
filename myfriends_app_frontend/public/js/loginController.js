@@ -33,14 +33,23 @@
         console.log(response.data);
 
         if (response.data.status == 401) {
-          $rootScope.error_msg = "Unauthorized";
+          console.log("response.data.", response.data.message);
+          $rootScope.error_msg = response.data.message;
           vm.dataLoading = false;
         } else {
           $rootScope.currentUser = response.data.user;
           localStorage.setItem('token', JSON.stringify(response.data.token));
           $window.localStorage.setItem('user', JSON.stringify(response.data.user));
-          vm.dataLoading = false;
+
+          $window.localStorage.setItem('friends', JSON.stringify(response.data.friends));
+
+
+          $rootScope.friends = response.data.friends;
+          // this.getGoogleMap();
+          // $scope.mapController.getGoogleMap();
           // $rootScope.loggedIn = true;
+          vm.dataLoading = false;
+          $rootScope.retrieveGoogleMap = true;
           $location.path('/dashboard');
         };
 
@@ -55,6 +64,7 @@
       localStorage.clear('token');
       $scope.error_msg = null;
       $window.localStorage.removeItem('user');
+      $window.localStorage.removeItem('friends');
       location.reload();
       $location.path("/");
     }; // End logout function
@@ -76,11 +86,13 @@
         console.log(result.data);
 
         if (result.data.error) {
-          $rootScope.errorMessage = result.data.error;
+          $rootScope.error_msg = result.data.error;
+          vm.dataLoading = false;
         } else {
           vm.dataLoading = false;
-          $location.path('/login');
+          $location.path('/dashboard');
         };
+
 
       }.bind(this));
 
@@ -106,6 +118,7 @@
       }.bind(this));
 
     }; // end getUsers function
+
 
   }; // end
 
