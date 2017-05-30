@@ -38,6 +38,7 @@
           vm.dataLoading = false;
         } else {
           $rootScope.currentUser = response.data.user;
+          $rootScope.error_msg = null;
           localStorage.setItem('token', JSON.stringify(response.data.token));
           $window.localStorage.setItem('user', JSON.stringify(response.data.user));
 
@@ -98,6 +99,10 @@
 
     }; // end register function
 
+    this.dashboard = function() {
+      console.log("hitDashboard");
+      $location.path('/dashboard');
+    }; // end dashoard function
 
     // Get all users
     this.getUsers = function() {

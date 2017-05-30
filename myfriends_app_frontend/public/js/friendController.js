@@ -49,6 +49,12 @@
       console.log($rootScope.myFriend);
       var userId = $rootScope.currentUser.id;
       var friendId = $rootScope.myFriend.id;
+
+      // remove the marker
+      for (var i = 0; i < $rootScope.friends.length; i++) {
+        $rootScope.friends[i].marker = "";
+      }
+
       // /users/: user_id / friends /: id
 
       $http({
@@ -146,15 +152,15 @@
     }; // end getGoogleMap function
 
 
-    this.init = function() {
-      if ($rootScope.retrieveGoogleMap) {
-        this.getGoogleMap();
-        $rootScope.retrieveGoogleMap = !$rootScope.retrieveGoogleMap;
-      };
-
-    };
-
-    this.init();
+    // this.init = function() {
+    //   if ($rootScope.retrieveGoogleMap) {
+    //     this.getGoogleMap();
+    //     $rootScope.retrieveGoogleMap = !$rootScope.retrieveGoogleMap;
+    //   };
+    //
+    // };
+    //
+    // this.init();
 
     $scope.sort = function(keyname) {
       $scope.sortKey = keyname; //set the sortKey to the param passed
